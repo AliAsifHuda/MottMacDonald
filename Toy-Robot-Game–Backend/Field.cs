@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MottMacDonald 
 {
     /*
-    * The field contains the cordinates as numbers and it contains a string.
+    * The field contains the cordinates as tuple and it contains a string.
     * The string indicates what the specific cordinate contains. This information
     * is stroed as a dictionary. If the cordinates has nothing in it (eg no wall 
     * nor a robot) then the cordinate is marked as empty (initial state). Otherwise
@@ -16,23 +16,19 @@ namespace MottMacDonald
     public class Field
     {        
         public const int dimension = 5;
-        public Dictionary<int, String> field = new Dictionary<int, String>();
+        public Dictionary<Tuple<int, int>, String> field = new Dictionary<Tuple<int, int>, String>();
         
         public void initialiseField(int fieldDimension = dimension) 
         {
-            for (int i = 0; i < fieldDimension*fieldDimension; i++)
+            for (int x = 0; x < fieldDimension; x++)
             {
-                field.Add(i, "empty");
+                for (int y = 0; y < fieldDimension; y++)
+                {
+                    field.Add(new Tuple<int, int>(x, y), "empty");
+                }
+                
             }
         }
-        
-        public Tuple<int,int> getCordinatesFromIndex(int index)
-        {
-            int x = (index/dimension)+1;
-            int y = (index%dimension)+1;
-            
-            return new Tuple<int,int>(x,y);
-        } 
 
     }
 }

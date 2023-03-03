@@ -28,9 +28,7 @@ namespace MottMacDonald
 
         public void placeRobot(String command)
         {
-            var words = (parser(command));
-            
-            Console.WriteLine(words);
+            Tuple<int, int, String> cordinatesAndDirection = (parser(command));
         }
 
         private Tuple<int, int, String> parser(String s)
