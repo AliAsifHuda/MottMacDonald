@@ -28,7 +28,24 @@ namespace MottMacDonald
 
         public void placeRobot(String command)
         {
-            //TODO
+            var words = (parser(command));
+            
+            Console.WriteLine(words);
+        }
+
+        private Tuple<int, int, String> parser(String s)
+        {
+            String[] splitByComma = s.Split(' ');
+            //String command = splitByComma[0];
+
+            var remaining = new String(splitByComma[1]);
+            var cordinatesAndDirection = remaining.Split(',');
+
+            var x = Int32.Parse(cordinatesAndDirection[0]);
+            var y = Int32.Parse(cordinatesAndDirection[1]);
+            var facing = cordinatesAndDirection[2];
+
+            return new Tuple<int, int, String>(x, y, facing);
         }
 
         public static void Main(string[] args)
