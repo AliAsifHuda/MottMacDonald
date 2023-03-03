@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 namespace MottMacDonald 
 {
     public class Game
-    {        
+    {   
+        private Dictionary<Tuple<int, int>, String> field;
+
         public Game()
         {
-            Field field = new Field();
-            field.initialiseField();
+            Field f = new Field();
+            f.initialiseField();
+            field = f.getField();
         }
 
         public void readCommand(String command)
@@ -28,7 +31,12 @@ namespace MottMacDonald
 
         public void placeRobot(String command)
         {
-            Tuple<int, int, String> cordinatesAndDirection = (parser(command));
+            Tuple<int, int, String> location = (parser(command));
+            
+            field[Tuple.Create(location.Item1,location.Item2)] = location.Item3;
+
+            Console.WriteLine(field[Tuple.Create(2,3)]);
+
         }
 
         private Tuple<int, int, String> parser(String s)

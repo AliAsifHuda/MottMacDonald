@@ -30,5 +30,9 @@ namespace MottMacDonald
             }
         }
 
+        public Dictionary<Tuple<int, int>, String> getField() {
+            return field;
+        }
+
     }
 }
