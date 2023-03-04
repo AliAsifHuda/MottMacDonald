@@ -33,7 +33,7 @@ namespace MottMacDonald
 
         public void placeRobot(String command)
         {
-            Tuple<int, int, String> location = (parser(command));
+            Tuple<int, int, String> location = (Parser.extractCordinatesAndLocation(command));
             if (location.Item1 == -1)
             {
                 return;
@@ -52,25 +52,6 @@ namespace MottMacDonald
             robotExists = true;
             Console.WriteLine(field[Tuple.Create(2,3)]);
 
-        }
-
-        private Tuple<int, int, String> parser(String s)
-        {
-            String[] splitByComma = s.Split(' ');
-            //String command = splitByComma[0];
-
-            var remaining = new String(splitByComma[1]);
-            var cordinatesAndDirection = remaining.Split(',');
-
-            var x = Int32.Parse(cordinatesAndDirection[0]);
-            var y = Int32.Parse(cordinatesAndDirection[1]);
-            var facing = cordinatesAndDirection[2];
-            
-            if(x > 5 || y > 5 || (facing != "NORTH" && facing != "SOUTH" && facing !=  "EAST" && facing !=  "WEST"))
-                return new Tuple<int, int, String>(-1, -1, "-1"); 
-
-            return new Tuple<int, int, String>(x, y, facing);
-            
         }
 
         public static void Main(string[] args)
