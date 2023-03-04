@@ -29,6 +29,9 @@ namespace MottMacDonald
                 case string b when b.Contains("PLACE_WALL"):
                     placeWall(command);
                     break;
+                case string c when c.Contains("REPORT"):
+                    report();
+                    break;
                 default:
                     break;
             }
@@ -68,11 +71,17 @@ namespace MottMacDonald
             Console.WriteLine(field[targetLocation]);
         }
 
+        public void report()
+        {
+            Console.WriteLine(robotCurrentLocation.Item1 + "," + robotCurrentLocation.Item2 + "," + field[robotCurrentLocation]);
+        }
+
         public static void Main(string[] args)
         {
             Game g = new Game();
             g.readCommand("PLACE_ROBOT 2,3,NORTH");
             g.readCommand("PLACE_WALL 3,3");
+            g.readCommand("REPORT");
         }
     }
 }
