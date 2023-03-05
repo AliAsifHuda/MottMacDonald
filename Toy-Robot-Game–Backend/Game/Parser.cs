@@ -27,7 +27,7 @@ namespace MottMacDonald
             if(cordinatesAndDirection.Length > 2)
                 facing = cordinatesAndDirection[2];
             
-            if(x > 5 || y > 5 || (facing != "NORTH" && facing != "SOUTH" && facing !=  "EAST" && facing !=  "WEST" && facing !=  "x"))
+            if(x > 5 || y > 5 || (facing != "NORTH" && facing != "SOUTH" && facing != "EAST" && facing !=  "WEST" && facing !=  "x"))
                 return new Tuple<int, int, String>(-1, -1, "-1"); 
 
             return new Tuple<int, int, String>(x, y, facing);

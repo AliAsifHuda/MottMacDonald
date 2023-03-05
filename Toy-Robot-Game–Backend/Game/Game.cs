@@ -35,6 +35,9 @@ namespace MottMacDonald
                 case string d when d.Contains("MOVE"):
                     move();
                     break;
+                case string d when (d.Contains("LEFT") || d.Contains("RIGHT")):
+                    turn(command);
+                    break;
                 default:
                     break;
             }
@@ -42,25 +45,23 @@ namespace MottMacDonald
 
         public void placeRobot(String command)
         {
-            Tuple<int, int, String> location = Parser.extractCordinatesAndLocation(command);
-            if (location.Item1 == -1)
+            Tuple<int, int, String> location = Parser.extractCordinatesAndLocation(command);            
+            var newLocation = Tuple.Create(location.Item1,location.Item2);
+            
+            if (location.Item1 == -1 || field[newLocation] == "WALL")
             {
                 return;
             }
             
-            var newLocation = Tuple.Create(location.Item1,location.Item2);
             if (robotExists)
             {
                 field[robotCurrentLocation] = "empty";
             }
 
-            newLocation = Tuple.Create(location.Item1,location.Item2);
             field[newLocation] = location.Item3;
             robotCurrentLocation = newLocation;
 
             robotExists = true;
-            Console.WriteLine(field[Tuple.Create(2,3)]);
-
         }
 
         public void placeWall(String command)
@@ -71,7 +72,6 @@ namespace MottMacDonald
             {
                 field[targetLocation] = "WALL";
             }
-            Console.WriteLine(field[targetLocation]);
         }
 
         public void report()
@@ -104,32 +104,55 @@ namespace MottMacDonald
                             placeRobot("PLACE_ROBOT " + new String(x + "," + (y - 1)) + "," + "SOUTH");
                         }
                         break;
-                    case "EAST":
+                    case "WEST":
                         if(x == 1) 
                         {
-                            placeRobot("PLACE_ROBOT " + new String("5" + "," + y) + "," + "EAST");
+                            placeRobot("PLACE_ROBOT " + new String("5" + "," + y) + "," + "WEST");
                         } else { 
-                            placeRobot("PLACE_ROBOT " + new String((x - 1) + "," + y) + "," + "EAST");
+                            placeRobot("PLACE_ROBOT " + new String((x - 1) + "," + y) + "," + "WEST");
                         }
                         break;
-                    case "WEST":
+                    case "EAST":
                         if(x == 5) 
                         {
-                            placeRobot("PLACE_ROBOT " + new String("1" + "," + y) + "," + "WEST");
+                            placeRobot("PLACE_ROBOT " + new String("1" + "," + y) + "," + "EAST");
                         } else { 
-                            placeRobot("PLACE_ROBOT " + new String((x + 1) + "," + y) + "," + "WEST");
+                            placeRobot("PLACE_ROBOT " + new String((x + 1) + "," + y) + "," + "EAST");
                         }
                         break;
                 }
             }
         }
 
+        public void turn(String leftOrRight)
+        {
+            String[] direction = new String[] { "NORTH", "EAST", "SOUTH", "WEST" };
+            var currentDirection = field[robotCurrentLocation];
+            var x = robotCurrentLocation.Item1;
+            var y = robotCurrentLocation.Item2;
+            
+            if(leftOrRight == "RIGHT")
+            {
+                var newDirection = Array.IndexOf(direction, currentDirection) + 1 == 4 ? 0 : Array.IndexOf(direction, currentDirection) + 1;
+                placeRobot("PLACE_ROBOT " + x + "," + y + "," + direction[newDirection]);
+            } else
+            {
+                var newDirection = Array.IndexOf(direction, currentDirection) - 1 == -1 ? 3 : Array.IndexOf(direction, currentDirection) - 1;
+                placeRobot("PLACE_ROBOT " + x + "," + y + "," + direction[newDirection]);
+            }
+
+        }
+
         public static void Main(string[] args)
         {
             Game g = new Game();
-            g.readCommand("PLACE_ROBOT 1,1,SOUTH");
-            g.readCommand("PLACE_WALL 3,3");
-            g.readCommand("REPORT");
+            
+            g.readCommand("PLACE_ROBOT 2,2,WEST");
+            g.readCommand("PLACE_WALL 1,1");
+            g.readCommand("PLACE_WALL 2,2");
+            g.readCommand("PLACE_WALL 1,3");
+            g.readCommand("LEFT");
+            g.readCommand("LEFT");
             g.readCommand("MOVE");
             g.readCommand("REPORT");
         }

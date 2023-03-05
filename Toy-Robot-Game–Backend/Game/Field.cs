@@ -20,9 +20,9 @@ namespace MottMacDonald
         
         public void initialiseField(int fieldDimension = dimension) 
         {
-            for (int x = 0; x < fieldDimension; x++)
+            for (int x = 1; x <= fieldDimension; x++)
             {
-                for (int y = 0; y < fieldDimension; y++)
+                for (int y = 1; y <= fieldDimension; y++)
                 {
                     field.Add(new Tuple<int, int>(x, y), "empty");
                 }
