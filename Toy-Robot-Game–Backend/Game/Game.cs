@@ -151,7 +151,7 @@ namespace MottMacDonald
             String[] direction = new String[] { "NORTH", "EAST", "SOUTH", "WEST" };
             var currentDirection = field[robotCurrentLocation];
             var currentDirectionIndex = Array.IndexOf(direction, currentDirection); 
-            var x, y = robotCurrentLocation.Item1;
+            var x = robotCurrentLocation.Item1;
             var y = robotCurrentLocation.Item2;
             
             if(leftOrRight == "RIGHT")
