@@ -8,7 +8,7 @@ namespace MottMacDonald
 {
     /*
     * The parser class reads the string command and then extracts the cordinates and/or the
-    * directions. ANd then return cordinates as int and direction as strings.
+    * directions. And then return cordinates as int and direction as strings.
     */
     class Parser
     {        
