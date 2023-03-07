@@ -15,8 +15,8 @@ namespace MottMacDonald
     */
     public class Field
     {        
-        public const int dimension = 5;
-        public Dictionary<Tuple<int, int>, String> field = new Dictionary<Tuple<int, int>, String>();
+        private const int dimension = 5;
+        private Dictionary<Tuple<int, int>, String> field = new Dictionary<Tuple<int, int>, String>();
         
         public void InitialiseField(int fieldDimension = dimension) 
         {

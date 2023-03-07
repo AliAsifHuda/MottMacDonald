@@ -62,8 +62,8 @@ namespace MottMacDonald
         {
             Tuple<int, int, String> location = Parser.extractCordinatesAndLocation(command);            
             var newLocation = Tuple.Create(location.Item1,location.Item2);
-            
-            if (location.Item1 == -1 || field[newLocation] == "WALL")
+
+            if (location.Item1 == -1 || newLocation.Item1 > 5 || newLocation.Item1 < 1 || newLocation.Item2 > 5 || newLocation.Item2 < 1 || field[newLocation] == "WALL")
                 return;                        
             if (robotExists)
                 field[robotCurrentLocation] = "empty";
@@ -93,6 +93,9 @@ namespace MottMacDonald
         */
         public void Report()
         {
+            if (robotCurrentLocation.Item1 == -1 || robotCurrentLocation.Item2 == -1)
+                return;               
+            
             Console.WriteLine(robotCurrentLocation.Item1 + "," + 
                               robotCurrentLocation.Item2 + "," +
                               field[robotCurrentLocation]);
@@ -134,10 +137,10 @@ namespace MottMacDonald
                         break;
 
                     case "EAST":
-                        if (x == 5) 
+                        if (x == 5) {
                             PlaceRobot("PLACE_ROBOT " + new String("1" + "," + y) + "," + "EAST");
-                        else  
-                            PlaceRobot("PLACE_ROBOT " + new String((x + 1) + "," + y) + "," + "EAST");                        
+                        }else{  
+                            PlaceRobot("PLACE_ROBOT " + new String((x + 1) + "," + y) + "," + "EAST"); }                       
                         break;
                 }
             }
@@ -178,12 +181,18 @@ namespace MottMacDonald
 
         public static void Main(string[] args)
         {
-            Game g = new Game();
-            string[] dirs = Directory.GetFiles(@"../TestData", "*");
+            //Goes each of the files in TestData DIrectory and processes each command
+            string[] dirs = Directory.GetFiles(@"../TestData");
             foreach (var item in dirs)
             {
+                Console.WriteLine(item);
+            };
+            for (int i = 0; i < dirs.Length; i++)
+            {                
+                Game g = new Game();
                 Console.WriteLine("#NEW FILE#");
-                foreach (string line in System.IO.File.ReadLines(@"" + item))
+                //Console.WriteLine(item);
+                foreach (string line in System.IO.File.ReadLines(@"" + dirs[i]))
                 {  
                     g.ReadCommand(line); 
                 }  
