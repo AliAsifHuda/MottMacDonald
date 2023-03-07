@@ -1,6 +1,6 @@
-The **dotnet run** command should be used in the Game directory to run the project.
+The **dotnet run** command should be used in the *Game directory* to run the project.
 
-The **dotnet test** command should be used in the game directory  to run tests.
+The **dotnet test** command should be used in the *Game directory*  to run tests.
 
 The project's TestData directory contains 11 Files containg test data for the project. The operations performed by the files are summarised as following:
 
