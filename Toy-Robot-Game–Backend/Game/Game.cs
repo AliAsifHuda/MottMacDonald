@@ -183,15 +183,10 @@ namespace MottMacDonald
         {
             //Goes each of the files in TestData DIrectory and processes each command
             string[] dirs = Directory.GetFiles(@"../TestData");
-            foreach (var item in dirs)
-            {
-                Console.WriteLine(item);
-            };
             for (int i = 0; i < dirs.Length; i++)
             {                
                 Game g = new Game();
                 Console.WriteLine("#NEW FILE#");
-                //Console.WriteLine(item);
                 foreach (string line in System.IO.File.ReadLines(@"" + dirs[i]))
                 {  
                     g.ReadCommand(line); 
