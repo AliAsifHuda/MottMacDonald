@@ -15,8 +15,8 @@ namespace MottMacDonald
         public Game()
         {
             Field f = new Field();
-            f.initialiseField();
-            field = f.getField();
+            f.InitialiseField();
+            field = f.GetField();
         }
 
         /*
@@ -179,15 +179,16 @@ namespace MottMacDonald
         public static void Main(string[] args)
         {
             Game g = new Game();
+            string[] dirs = Directory.GetFiles(@"../TestData", "*");
+            foreach (var item in dirs)
+            {
+                Console.WriteLine("#NEW FILE#");
+                foreach (string line in System.IO.File.ReadLines(@"" + item))
+                {  
+                    g.ReadCommand(line); 
+                }  
+            }
             
-            g.ReadCommand("PLACE_ROBOT 2,2,WEST");
-            g.ReadCommand("PLACE_WALL 1,1");
-            g.ReadCommand("PLACE_WALL 2,2");
-            g.ReadCommand("PLACE_WALL 1,3");
-            g.ReadCommand("LEFT");
-            g.ReadCommand("LEFT");
-            g.ReadCommand("MOVE");
-            g.ReadCommand("REPORT");
         }
     }
 }

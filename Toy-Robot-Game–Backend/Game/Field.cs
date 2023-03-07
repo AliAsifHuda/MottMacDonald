@@ -18,7 +18,7 @@ namespace MottMacDonald
         public const int dimension = 5;
         public Dictionary<Tuple<int, int>, String> field = new Dictionary<Tuple<int, int>, String>();
         
-        public void initialiseField(int fieldDimension = dimension) 
+        public void InitialiseField(int fieldDimension = dimension) 
         {
             for (int x = 1; x <= fieldDimension; x++)
             {
@@ -30,7 +30,7 @@ namespace MottMacDonald
             }
         }
 
-        public Dictionary<Tuple<int, int>, String> getField() {
+        public Dictionary<Tuple<int, int>, String> GetField() {
             return field;
         }
 

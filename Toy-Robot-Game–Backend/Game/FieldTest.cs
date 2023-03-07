@@ -8,8 +8,17 @@ namespace MottMacDonald
         public void DefaultFieldSizeIsTwentyFive() 
         {
             Field f = new Field();
-            f.initialiseField();
-            int size = f.getField().Count;
+            f.InitialiseField();
+            int size = f.GetField().Count;
+            Assert.Equal(25, size);
+        }
+
+        [Fact]
+        public void GetFieldCorrectlyReturnsField() 
+        {
+            Field f = new Field();
+            f.InitialiseField();
+            int size = f.GetField().Count;
             Assert.Equal(25, size);
         }
 
@@ -18,8 +27,8 @@ namespace MottMacDonald
         public void FieldOfDifferentMatrixSizeShouldBeValid(int dimension)
         {
             Field f = new Field();
-            f.initialiseField(dimension);
-            int size = f.getField().Count;
+            f.InitialiseField(dimension);
+            int size = f.GetField().Count;
             Assert.Equal(9, size);
         } 
     }

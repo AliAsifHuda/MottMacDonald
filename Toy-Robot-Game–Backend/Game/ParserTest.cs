@@ -93,8 +93,8 @@ namespace MottMacDonald
         public void FieldOfDifferentMatrixSizeShouldBeValid(int dimension)
         {
             Field f = new Field();
-            f.initialiseField(dimension);
-            int size = f.getField().Count;
+            f.InitialiseField(dimension);
+            int size = f.GetField().Count;
             Assert.Equal(9, size);
         } 
     }
